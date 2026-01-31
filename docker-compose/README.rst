@@ -47,10 +47,19 @@ Get certificates (run once, or when renewing)
 
 .. code-block:: bash
 
- docker compose build create_or_renew_certificate
- docker compose --profile create_or_renew_certificate run --rm create_or_renew_certificate
+ docker compose run create_or_renew_certificate
+
+Create or update the txt records in your domain when asked.
 
 This obtains the wildcard cert and creates ``traefik-tls.yml`` in the letsencrypt volume.
+
+This certificate will not auto-renew, but if you run the same command again it will renew it automatically without further manual change to the DNS being required. It will also skip the renewal if the certificate is not close to expiry yet.
+
+.. code-block:: bash
+
+ docker compose run create_or_renew_certificate
+
+Feel free to schedule this command to update the cert automatically.
 
 Start the stack
 ^^^^^^^^^^^^^^^
